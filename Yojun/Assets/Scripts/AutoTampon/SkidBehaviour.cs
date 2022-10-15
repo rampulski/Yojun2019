@@ -16,6 +16,7 @@ public class SkidBehaviour : MonoBehaviour
 
     private int playerIndex;
     private float turnIndicatorTimer;
+    private bool ready;
     private bool turnLeft;
     private bool killed;
     private float currentSpeedBoost;
@@ -29,6 +30,7 @@ public class SkidBehaviour : MonoBehaviour
         moveBehaviour = GetComponent<MoveBehaviour>();
 
         turnIndicatorTimer = 0;
+        ready = false;
         turnLeft = false;
         killed = false;
         currentSpeedBoost = 0;
@@ -38,7 +40,7 @@ public class SkidBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!killed)
+        if (ready && !killed)
         {
             if (inputManager.inputPlayersPressed[playerIndex])
             {
@@ -100,6 +102,20 @@ public class SkidBehaviour : MonoBehaviour
             StartCoroutine(Kill());
     }
 
+    public void Init(int index, float delay)
+    {
+        playerIndex = index;
+
+        StartCoroutine(Delay(delay));
+    }
+
+    private IEnumerator Delay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        ready = true;
+    }
+
     private IEnumerator Kill()
     {
         killed = true;
@@ -107,11 +123,6 @@ public class SkidBehaviour : MonoBehaviour
         yield return null;
 
         Destroy(gameObject);
-    }
-
-    public void SetPlayerNumber(int index)
-    {
-        playerIndex = index;
     }
 
     public float GetCurrentSpeedBoost()
