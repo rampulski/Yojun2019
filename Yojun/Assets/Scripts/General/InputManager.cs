@@ -20,6 +20,8 @@ public class InputManager : MonoBehaviour
 
     public bool[] inputPlayersPressed;
 
+    [SerializeField] private GameSettings gameSettings;
+
     private GabaritPlayerPos gabaritScript;
     public float timeToChangeScene;
     public float timePressed;
@@ -194,9 +196,10 @@ public class InputManager : MonoBehaviour
         {
             inputPlayersPressed[11] = false;
         }
-
-
-
     }
 
+    public Color GetPlayerColor(int index)
+    {
+        return gameSettings.GetPlayerColor(index);
+    }
 }
