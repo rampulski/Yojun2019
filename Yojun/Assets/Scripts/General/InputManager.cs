@@ -3,7 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InputManager : MonoBehaviour {
+public class InputManager : MonoBehaviour
+{
+    private static InputManager _instance;
+    public static InputManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<InputManager>();
+            }
+            return _instance;
+        }
+    }
 
     public bool[] inputPlayersPressed;
 
@@ -11,10 +24,9 @@ public class InputManager : MonoBehaviour {
     public float timeToChangeScene;
     public float timePressed;
 
-    void Start () {
-
+    void Start ()
+    {
         gabaritScript = GameObject.FindObjectOfType<GabaritPlayerPos>();
-
     }
 
     void Update()
