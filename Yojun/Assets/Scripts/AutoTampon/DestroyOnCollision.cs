@@ -27,10 +27,11 @@ public class DestroyOnCollision : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
+            else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
             {
                 Destroy(collision.gameObject);
             }
+            else
             {
                 Destroy(gameObject);
                 Destroy(collision.gameObject);

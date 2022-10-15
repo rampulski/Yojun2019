@@ -124,9 +124,4 @@ public class SkidBehaviour : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-    public float GetCurrentSpeedBoost()
-    {
-        return currentSpeedBoost;
-    }
 }
