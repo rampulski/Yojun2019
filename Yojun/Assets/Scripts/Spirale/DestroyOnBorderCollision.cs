@@ -19,6 +19,11 @@ public class DestroyOnBorderCollision : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Border"))
+        {
+            if (GetComponent<ExplodeIntoCubes>())
+                GetComponent<ExplodeIntoCubes>().Explode();
+
             Destroy(gameObject);
+        }
     }
 }
