@@ -52,16 +52,17 @@ public class SkidBehaviour : MonoBehaviour
         {
             if (inputManager.inputPlayersPressed[playerIndex])
             {
-                skidding = true;
-
                 float speed = 0;
                 if (moveBehaviour)
                 {
                     moveBehaviour.BoostSpeed(currentSpeedBoost);
                     speed = moveBehaviour.GetSpeed();
 
-                    moveBehaviour.Stop();
+                    if (!skidding)
+                        moveBehaviour.Stop();
                 }
+
+                skidding = true;
 
                 if (turnLeft)
                 {
@@ -88,6 +89,8 @@ public class SkidBehaviour : MonoBehaviour
                     skidding = false;
 
                     SwitchTurnIndicatorDirection();
+
+                    moveBehaviour.Resume();
                 }
 
                 turnIndicatorTimer += Time.deltaTime;
@@ -95,8 +98,6 @@ public class SkidBehaviour : MonoBehaviour
                     SwitchTurnIndicatorDirection();
 
                 currentRadius = maxSpiralRadius;
-
-                moveBehaviour.Resume();
             }
         }
 
