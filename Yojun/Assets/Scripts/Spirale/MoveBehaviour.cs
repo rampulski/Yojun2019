@@ -7,8 +7,6 @@ public class MoveBehaviour : MonoBehaviour
     [SerializeField] private float minSpeed = 2;
     [SerializeField] private float maxSpeed = 20;
 
-    private SkidBehaviour skidBehaviour;
-
     private float currentSpeed;
     private bool stopped;
 
@@ -16,8 +14,6 @@ public class MoveBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        skidBehaviour = GetComponent<SkidBehaviour>();
-
         currentSpeed = minSpeed;
         stopped = false;
     }

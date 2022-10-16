@@ -29,6 +29,9 @@ public class SkidBehaviour : MonoBehaviour
         inputManager = InputManager.instance;
         moveBehaviour = GetComponent<MoveBehaviour>();
 
+        turnLeftIndicator.GetComponent<SpriteRenderer>().enabled = false;
+        turnRightIndicator.GetComponent<SpriteRenderer>().enabled = false;
+
         turnIndicatorTimer = 0;
         ready = false;
         turnLeft = false;
@@ -80,16 +83,7 @@ public class SkidBehaviour : MonoBehaviour
                     turnIndicatorTimer = 0;
                     turnLeft = !turnLeft;
 
-                    if (turnLeft)
-                    {
-                        turnLeftIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
-                        turnRightIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
-                    }
-                    else
-                    {
-                        turnLeftIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
-                        turnRightIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
-                    }
+                    ShowTurnIndicator();
                 }
 
                 currentRadius = maxSpiralRadius;
@@ -106,14 +100,22 @@ public class SkidBehaviour : MonoBehaviour
     {
         playerIndex = index;
 
-        StartCoroutine(Delay(delay));
+        StartCoroutine(WaitToStart(delay));
     }
 
-    private IEnumerator Delay(float delay)
+    private IEnumerator WaitToStart(float delay)
     {
         yield return new WaitForSeconds(delay);
 
         ready = true;
+        turnLeft = Random.value > 0.5 ? true : false;
+        ShowTurnIndicator();
+    }
+
+    private void ShowTurnIndicator()
+    {
+        turnLeftIndicator.GetComponent<SpriteRenderer>().enabled = turnLeft;
+        turnRightIndicator.GetComponent<SpriteRenderer>().enabled = !turnLeft;
     }
 
     private IEnumerator Kill()
