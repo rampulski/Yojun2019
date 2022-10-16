@@ -120,6 +120,8 @@ public class SkidBehaviour : MonoBehaviour
     {
         killed = true;
 
+        GetComponent<ExplodeIntoCubes>().Explode();
+
         yield return null;
 
         Destroy(gameObject);

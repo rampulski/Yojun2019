@@ -13,13 +13,11 @@ public class AutoSpawner : MonoBehaviour
     private Transform auto;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         auto = null;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (inputManager.inputPlayersPressed[playerNumber - 1] && auto == null)

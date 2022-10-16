@@ -25,11 +25,23 @@ public class DestroyOnCollision : MonoBehaviour
         {
             if (moveBehaviour.GetSpeed() < collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
             {
+                if (gameObject.GetComponent<ExplodeIntoCubes>())
+                    gameObject.GetComponent<ExplodeIntoCubes>().Explode();
+
                 Destroy(gameObject);
+
+                if (collision.gameObject.GetComponent<TrailBehaviour>())
+                    collision.gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
             }
             else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
             {
+                if (collision.gameObject.GetComponent<ExplodeIntoCubes>())
+                    collision.gameObject.GetComponent<ExplodeIntoCubes>().Explode();
+
                 Destroy(collision.gameObject);
+
+                if (gameObject.GetComponent<TrailBehaviour>())
+                    gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
             }
             else
             {

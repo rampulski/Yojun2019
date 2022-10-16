@@ -4,28 +4,17 @@ using UnityEngine;
 
 public class ExplodeIntoCubes : MonoBehaviour
 {
-   public int cubesPerAxis = 4;
+	[SerializeField] private GameObject carPart;
+	public int cubesPerAxis = 4;
 	public float delay = 1f;
 	public float force = 10f;
 	public float radius = 0.05f;
+	[SerializeField] private float minTimeToDie = 4;
+	[SerializeField] private float maxTimeToDie = 4;
 
 
-    void Start()
-    {
-    Invoke ("Main", delay);
-        
-    }
-
-	void Update()
+	public void Explode()
 	{
-
-		//if (Input.GetKeyDown("space"))
-		//{
-		//	Main();
-		//}
-	}
-
-	void Main(){
 		for (int x = 0; x < cubesPerAxis; x++)
 		{
 			for (int y = 0; y < cubesPerAxis; y++)
@@ -36,26 +25,21 @@ public class ExplodeIntoCubes : MonoBehaviour
 				}
 			}
 		}
-		//Destroy(gameObject);
     }
 
-	void CreateCube(Vector3 coordinates) {
+	private void CreateCube(Vector3 coordinates)
+	{
+		carPart = Instantiate(carPart);
+		carPart.GetComponent<CarPart>().Spawn(minTimeToDie, maxTimeToDie);
 
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		carPart.GetComponent<MeshRenderer>().material = GetComponentInChildren<Renderer>().material;
 
-		Renderer rd = cube.GetComponentInChildren<Renderer>();
-		rd.material = GetComponentInChildren<Renderer>().material;
+		carPart.transform.localScale = transform.localScale / cubesPerAxis;
 
-		cube.transform.localScale = transform.localScale / cubesPerAxis;
+		Vector3 firstCube = transform.position - transform.localScale / 2 + carPart.transform.localScale / 2;
+		carPart.transform.position = firstCube + Vector3.Scale(coordinates, carPart.transform.localScale);
+		carPart.transform.localScale = carPart.transform.localScale / 4;
 
-		Vector3 firstCube = transform.position - transform.localScale / 2 + cube.transform.localScale / 2;
-		cube.transform.position = firstCube + Vector3.Scale(coordinates, cube.transform.localScale);
-		cube.transform.localScale = cube.transform.localScale / 4;
-
-		Rigidbody rb = cube.AddComponent<Rigidbody>();
-		rb.useGravity = false;
-		rb.AddExplosionForce(force, transform.position, radius);
-
+		carPart.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius);
 	}
-
 }
