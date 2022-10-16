@@ -82,13 +82,13 @@ public class SkidBehaviour : MonoBehaviour
 
                     if (turnLeft)
                     {
-                        turnLeftIndicator.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
-                        turnRightIndicator.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+                        turnLeftIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                        turnRightIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
                     }
                     else
                     {
-                        turnLeftIndicator.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                        turnRightIndicator.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+                        turnLeftIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+                        turnRightIndicator.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
                     }
                 }
 
