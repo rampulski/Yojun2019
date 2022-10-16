@@ -24,7 +24,6 @@ public class InputManager : MonoBehaviour
 
     private GabaritPlayerPos gabaritScript;
     public float timeToChangeScene;
-    public float timePressed;
 
     void Start ()
     {
@@ -34,26 +33,23 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         timeToChangeScene += Time.deltaTime;
-
-        if (Input.GetKey(KeyCode.X) && timeToChangeScene >= 4f)
+        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
         {
-            timePressed += Time.deltaTime;
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+            if (Input.GetKey(KeyCode.LeftArrow))
+                buildIndex--;
+            else if (Input.GetKey(KeyCode.RightArrow))
+                buildIndex++;
+            
+            if (buildIndex < 0)
+                buildIndex = SceneManager.sceneCountInBuildSettings - 1;
+            else if (buildIndex >= SceneManager.sceneCountInBuildSettings)
+                buildIndex = 0;
 
-            if (SceneManager.GetActiveScene().buildIndex == 0 && timePressed >= 2f)
-            {
-                timeToChangeScene = 0f;
-                timePressed = 0f;
-                SceneManager.LoadScene(1);
-
-            }
-            else if (SceneManager.GetActiveScene().buildIndex == 1 && timePressed >= 2f)
-            {
-                timeToChangeScene = 0f;
-                timePressed = 0f;
-                SceneManager.LoadScene(0);
-            }
+            timeToChangeScene = 0f;
+            
+            SceneManager.LoadScene(buildIndex);
         }
-
 
         if (Input.GetKeyDown(KeyCode.B))
         {
