@@ -19,13 +19,6 @@ public class GabaritPlayerPos : MonoBehaviour {
 
         scaleValue = playerPosTransform[1].localScale.x;
 
-        color = Color.black;
-
-        for (int i = playerPosRenderer.Length - 1; i < playerPosRenderer.Length; i++)
-        {
-            playerPosRenderer[i].color = color;
-        }
-
     }
 
     void Update () {

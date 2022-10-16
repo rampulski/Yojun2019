@@ -58,7 +58,7 @@ public class AutoSpawner : MonoBehaviour
         if (canSpawn)
             spawnTimer += Time.deltaTime;
 
-        if (auto == null && !banned && canSpawn && spawnTimer >= delayToSpawn)
+        if (auto == null && !GameManager.instance.IsGameOver() && !banned && canSpawn && spawnTimer >= delayToSpawn)
         {
             if (transform.position.x > center.position.x)
                 auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, 180 - (Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg)), transform);
@@ -80,6 +80,8 @@ public class AutoSpawner : MonoBehaviour
 
             if (!GameManager.instance.IsPlayerExist(playerNumber - 1))
                 GameManager.instance.AddPlayer(playerNumber - 1, auto.gameObject);
+            else
+                GameManager.instance.ResetPlayer(playerNumber - 1, auto.gameObject);
 
             canSpawn = false;
         }

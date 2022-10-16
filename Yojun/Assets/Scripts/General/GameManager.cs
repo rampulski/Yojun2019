@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        else if (timer >= gameDuration)
+        else if (!gameOver && timer >= gameDuration)
         {
             gameOver = true;
 
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
 
             for (int i = 0; i < players.Count; i++)
             {
-                if (!winningPlayers.Contains(i))
+                if (!winningPlayers.Contains(i) && players[i].gameObject != null)
                     players[i].gameObject.GetComponent<Car>().Kill();
             }
         }
@@ -98,6 +98,15 @@ public class GameManager : MonoBehaviour
     public void AddPlayer(int index, GameObject go)
     {
         players.Add(new Player(index, go));
+    }
+
+    public void ResetPlayer(int index, GameObject go)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i].index == index)
+                players[i].gameObject = go;
+        }
     }
 
     public void KillPlayer(int index)
@@ -138,6 +147,11 @@ public class GameManager : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameOver;
     }
 
     public int GetPlayerScore(int index)
