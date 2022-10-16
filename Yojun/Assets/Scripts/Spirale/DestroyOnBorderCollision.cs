@@ -20,10 +20,7 @@ public class DestroyOnBorderCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Border"))
         {
-            if (GetComponent<ExplodeIntoCubes>())
-                GetComponent<ExplodeIntoCubes>().Explode();
-
-            Destroy(gameObject);
+            GetComponent<Car>().Kill();
         }
     }
 }

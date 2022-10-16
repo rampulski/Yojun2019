@@ -25,34 +25,22 @@ public class DestroyOnCollision : MonoBehaviour
         {
             if (moveBehaviour.GetSpeed() < collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
             {
-                if (gameObject.GetComponent<ExplodeIntoCubes>())
-                    gameObject.GetComponent<ExplodeIntoCubes>().Explode();
-
-                Destroy(gameObject);
+                GetComponent<Car>().Kill();
 
                 if (collision.gameObject.GetComponent<TrailBehaviour>())
                     collision.gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
             }
             else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
             {
-                if (collision.gameObject.GetComponent<ExplodeIntoCubes>())
-                    collision.gameObject.GetComponent<ExplodeIntoCubes>().Explode();
-
-                Destroy(collision.gameObject);
+                collision.gameObject.GetComponent<Car>().Kill();
 
                 if (gameObject.GetComponent<TrailBehaviour>())
                     gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
             }
             else
             {
-                if (gameObject.GetComponent<ExplodeIntoCubes>())
-                    gameObject.GetComponent<ExplodeIntoCubes>().Explode();
-
-                if (collision.gameObject.GetComponent<ExplodeIntoCubes>())
-                    collision.gameObject.GetComponent<ExplodeIntoCubes>().Explode();
-
-                Destroy(gameObject);
-                Destroy(collision.gameObject);
+                GetComponent<Car>().Kill();
+                collision.gameObject.GetComponent<Car>().Kill();
             }
         }
     }

@@ -102,7 +102,10 @@ public class SkidBehaviour : MonoBehaviour
         }
 
         if (currentRadius <= 0)
-            StartCoroutine(Kill());
+        {
+            killed = true;
+            GetComponent<Car>().Kill();
+        }
     }
 
     public void Init(int index, float delay)
@@ -134,16 +137,5 @@ public class SkidBehaviour : MonoBehaviour
     {
         turnLeftIndicator.GetComponent<SpriteRenderer>().enabled = turnLeft;
         turnRightIndicator.GetComponent<SpriteRenderer>().enabled = !turnLeft;
-    }
-
-    private IEnumerator Kill()
-    {
-        killed = true;
-
-        GetComponent<ExplodeIntoCubes>().Explode();
-
-        yield return null;
-
-        Destroy(gameObject);
     }
 }

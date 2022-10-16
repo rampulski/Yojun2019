@@ -9,16 +9,14 @@ public class TrailBehaviour : MonoBehaviour
     [SerializeField] private float durationIncreaseRate = 0.5f;
 
     private TrailRenderer trail;
-    private AutoSpawner spawner;
 
     private float currentDuration;
 
 
-    public void Init(AutoSpawner spawner, int score)
+    public void Init(int score)
     {
         trail = GetComponentInChildren<TrailRenderer>();
 
-        this.spawner = spawner;
         currentDuration = minDuration;
         trail.time = currentDuration;
 
@@ -34,6 +32,6 @@ public class TrailBehaviour : MonoBehaviour
         currentDuration = Mathf.Clamp(currentDuration + durationIncreaseRate, minDuration, maxDuration);
         trail.time = currentDuration;
 
-        spawner.IncreaseScore();
+        GetComponent<Car>().IncreaseScore();
     }
 }

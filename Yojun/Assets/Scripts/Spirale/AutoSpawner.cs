@@ -14,7 +14,6 @@ public class AutoSpawner : MonoBehaviour
 
     private Transform auto;
 
-    private int score;
     private bool canSpawn;
     private bool banned;
     private float spawnTimer;
@@ -25,7 +24,6 @@ public class AutoSpawner : MonoBehaviour
     {
         auto = null;
 
-        score = 0;
         canSpawn = false;
         banned = true;
         spawnTimer = 0;
@@ -37,13 +35,18 @@ public class AutoSpawner : MonoBehaviour
         if (inputManager.inputPlayersPressed[playerNumber - 1])
         {
             banTimer = 0;
-            banned = false;
+            if (banned)
+            {
+                GameManager.instance.UnBanPlayer(playerNumber - 1);
+                banned = false;
+            }
         }
 
         banTimer += Time.deltaTime;
         if (banTimer >= delayToBan)
         {
             banned = true;
+            GameManager.instance.BanPlayer(playerNumber - 1);
         }
 
         if (auto == null && !canSpawn && !banned)
@@ -67,18 +70,18 @@ public class AutoSpawner : MonoBehaviour
                 renderers[i].material.SetColor("_EmissionColor", InputManager.instance.GetPlayerColor(playerNumber - 1));
             auto.GetComponentInChildren<TrailRenderer>().material.SetColor("_EmissionColor", InputManager.instance.GetPlayerColor(playerNumber - 1));
 
+            auto.GetComponent<Car>().Init(playerNumber - 1);
+
             if (auto.GetComponent<TrailBehaviour>())
-                auto.GetComponent<TrailBehaviour>().Init(this, score);
+                auto.GetComponent<TrailBehaviour>().Init(GameManager.instance.GetPlayerScore(playerNumber - 1));
 
             if (auto.GetComponent<SkidBehaviour>())
                 auto.GetComponent<SkidBehaviour>().Init(playerNumber - 1, delayToMove);
 
+            if (!GameManager.instance.IsPlayerExist(playerNumber - 1))
+                GameManager.instance.AddPlayer(playerNumber - 1, auto.gameObject);
+
             canSpawn = false;
         }
-    }
-
-    public void IncreaseScore()
-    {
-        score++;
     }
 }
