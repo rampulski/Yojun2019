@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float gameDuration;
     [SerializeField] private float gameOverDuration;
+    [SerializeField] private Image timerUI;
 
     private List<Player> players;
 
@@ -53,23 +56,31 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameOver && timer >= gameDuration)
+        timer += Time.deltaTime;
+        timerUI.fillAmount = 1 - (timer / gameDuration);
+
+        if (gameOver && timer >= gameDuration + gameOverDuration)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else if (timer >= gameDuration)
         {
             gameOver = true;
 
-            int winningPlayer = -1, winningScore = -1;
+            int winningScore = -1;
+            List<int> winningPlayers = new List<int>();
             for (int i = 0; i < players.Count; i++)
             {
                 if (players[i].score > winningScore)
                 {
-                    winningPlayer = i;
+                    winningPlayers.Add(i);
                     winningScore = players[i].score;
                 }
             }
 
             for (int i = 0; i < players.Count; i++)
             {
-                if (i != winningPlayer)
+                if (!winningPlayers.Contains(i))
                     players[i].gameObject.GetComponent<Car>().Kill();
             }
         }
