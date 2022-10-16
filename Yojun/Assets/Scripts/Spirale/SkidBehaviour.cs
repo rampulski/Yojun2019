@@ -6,7 +6,8 @@ public class SkidBehaviour : MonoBehaviour
 {
     [SerializeField] private Transform turnLeftIndicator;
     [SerializeField] private Transform turnRightIndicator;
-    [SerializeField] private float turnIndicatorTime;
+    [SerializeField] private float minTurnIndicatorTime;
+    [SerializeField] private float maxTurnIndicatorTime;
     [SerializeField] private float speedBoostRate;
     [SerializeField] private float maxSpiralRadius;
     [SerializeField] private float spiralShrinkSpeed;
@@ -16,6 +17,7 @@ public class SkidBehaviour : MonoBehaviour
 
     private int playerIndex;
     private float turnIndicatorTimer;
+    private float currentTurnIndicatorTime;
     private bool ready;
     private bool turnLeft;
     private bool killed;
@@ -33,6 +35,7 @@ public class SkidBehaviour : MonoBehaviour
         turnRightIndicator.GetComponent<SpriteRenderer>().enabled = false;
 
         turnIndicatorTimer = 0;
+        currentTurnIndicatorTime = maxTurnIndicatorTime;
         ready = false;
         turnLeft = false;
         killed = false;
@@ -78,9 +81,10 @@ public class SkidBehaviour : MonoBehaviour
             else
             {
                 turnIndicatorTimer += Time.deltaTime;
-                if (turnIndicatorTimer >= turnIndicatorTime)
+                if (turnIndicatorTimer >= currentTurnIndicatorTime)
                 {
                     turnIndicatorTimer = 0;
+                    currentTurnIndicatorTime = Mathf.Lerp(maxTurnIndicatorTime, minTurnIndicatorTime, currentSpeedBoost);
                     turnLeft = !turnLeft;
 
                     ShowTurnIndicator();
