@@ -12,10 +12,14 @@ public class AutoSpawner : MonoBehaviour
 
     private Transform auto;
 
+    private int score;
+
 
     void Start()
     {
         auto = null;
+
+        score = 0;
     }
 
     void Update()
@@ -32,8 +36,16 @@ public class AutoSpawner : MonoBehaviour
                 renderers[i].material.SetColor("_EmissionColor", InputManager.instance.GetPlayerColor(playerNumber - 1));
             auto.GetComponentInChildren<TrailRenderer>().material.SetColor("_EmissionColor", InputManager.instance.GetPlayerColor(playerNumber - 1));
 
-            if (auto.GetComponent<SkidBehaviour>())
+            if (auto.GetComponent<TrailBehaviour>())
+                auto.GetComponent<TrailBehaviour>().Init(this, score);
+
+                if (auto.GetComponent<SkidBehaviour>())
                 auto.GetComponent<SkidBehaviour>().Init(playerNumber - 1, delay);
         }
+    }
+
+    public void IncreaseScore()
+    {
+        score++;
     }
 }

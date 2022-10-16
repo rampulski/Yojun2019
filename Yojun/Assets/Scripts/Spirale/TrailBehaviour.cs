@@ -9,28 +9,31 @@ public class TrailBehaviour : MonoBehaviour
     [SerializeField] private float durationIncreaseRate = 0.5f;
 
     private TrailRenderer trail;
+    private AutoSpawner spawner;
 
     private float currentDuration;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void Init(AutoSpawner spawner, int score)
     {
-        currentDuration = minDuration;
-
         trail = GetComponentInChildren<TrailRenderer>();
-        trail.time = currentDuration;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.spawner = spawner;
+        currentDuration = minDuration;
+        trail.time = currentDuration;
+
+        for (int i = 0; i < score; i++)
+        {
+            currentDuration = Mathf.Clamp(currentDuration + durationIncreaseRate, minDuration, maxDuration);
+            trail.time = currentDuration;
+        }
     }
 
     public void IncreaseDuration()
     {
         currentDuration = Mathf.Clamp(currentDuration + durationIncreaseRate, minDuration, maxDuration);
         trail.time = currentDuration;
+
+        spawner.IncreaseScore();
     }
 }
