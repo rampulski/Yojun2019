@@ -38,7 +38,7 @@ public class ExplodeIntoCubes : MonoBehaviour
 
 		Vector3 firstCube = transform.position - transform.localScale / 2 + carPart.transform.localScale / 2;
 		carPart.transform.position = firstCube + Vector3.Scale(coordinates, carPart.transform.localScale);
-		carPart.transform.localScale = carPart.transform.localScale / 4;
+		carPart.transform.localScale = carPart.transform.localScale / 3;
 
 		carPart.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius);
 	}
