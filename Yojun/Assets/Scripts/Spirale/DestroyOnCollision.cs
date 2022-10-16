@@ -45,6 +45,12 @@ public class DestroyOnCollision : MonoBehaviour
             }
             else
             {
+                if (gameObject.GetComponent<ExplodeIntoCubes>())
+                    gameObject.GetComponent<ExplodeIntoCubes>().Explode();
+
+                if (collision.gameObject.GetComponent<ExplodeIntoCubes>())
+                    collision.gameObject.GetComponent<ExplodeIntoCubes>().Explode();
+
                 Destroy(gameObject);
                 Destroy(collision.gameObject);
             }
