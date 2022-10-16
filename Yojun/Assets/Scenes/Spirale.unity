@@ -878,7 +878,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 3
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &393375488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1241,7 +1243,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 5
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &540421448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2141,7 +2145,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 6
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &1097865177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2212,7 +2218,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 11
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &1102671459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2486,7 +2494,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 7
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &1186003657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3067,7 +3077,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 9
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1 &1421646739 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1887709054448950, guid: 73b72b56b6f4f884e9607f1b2e7f94d1,
@@ -3202,7 +3214,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 4
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!850595691 &1520537452
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -3837,7 +3851,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 1
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1 &1901495079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1887709054448950, guid: 73b72b56b6f4f884e9607f1b2e7f94d1,
@@ -3913,7 +3929,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 12
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &1978770408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4278,7 +4296,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 2
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1 &2086335212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1887709054448950, guid: 73b72b56b6f4f884e9607f1b2e7f94d1,
@@ -4413,7 +4433,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 10
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &2136612634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4484,7 +4506,9 @@ MonoBehaviour:
   autoPrefab: {fileID: 5369735430947634421, guid: dbddb5bb125e8c44a81fe9af0c1fa6d9,
     type: 3}
   playerNumber: 8
-  delay: 0.5
+  delayToSpawn: 0.5
+  delayToMove: 0.5
+  delayToBan: 8
 --- !u!1001 &3293441340232458563
 PrefabInstance:
   m_ObjectHideFlags: 0
