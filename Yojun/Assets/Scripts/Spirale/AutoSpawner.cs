@@ -61,9 +61,9 @@ public class AutoSpawner : MonoBehaviour
         if (auto == null && !GameManager.instance.IsGameOver() && !banned && canSpawn && spawnTimer >= delayToSpawn)
         {
             if (transform.position.x > center.position.x)
-                auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, 180 - (Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg)), transform);
+                auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, 180 - (Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg)), transform.parent.parent);
             else
-                auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg), transform);
+                auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg), transform.parent.parent);
 
             MeshRenderer[] renderers = auto.GetComponentsInChildren<MeshRenderer>();
             for (int i = 0; i < renderers.Length; i++)
