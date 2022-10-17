@@ -22,7 +22,6 @@ public class SkidBehaviour : MonoBehaviour
     private bool turnLeft;
     private bool skidding;
     private bool killed;
-    private float currentSpeedBoost;
     private float currentRadius;
 
 
@@ -41,7 +40,6 @@ public class SkidBehaviour : MonoBehaviour
         turnLeft = false;
         skidding = false;
         killed = false;
-        currentSpeedBoost = 0;
         currentRadius = maxSpiralRadius;
     }
 
@@ -55,7 +53,6 @@ public class SkidBehaviour : MonoBehaviour
                 float speed = 0;
                 if (moveBehaviour)
                 {
-                    moveBehaviour.BoostSpeed(currentSpeedBoost);
                     speed = moveBehaviour.GetSpeed();
 
                     if (!skidding)
@@ -78,7 +75,8 @@ public class SkidBehaviour : MonoBehaviour
                 else
                     Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, 180) * transform.up * currentRadius, Color.yellow);
 
-                currentSpeedBoost += speedBoostRate * Time.deltaTime;
+                if (moveBehaviour)
+                    moveBehaviour.IncreaseSpeedBoost(speedBoostRate * Time.deltaTime);
 
                 currentRadius = Mathf.Clamp(currentRadius - (spiralShrinkSpeed * Time.deltaTime), 0, maxSpiralRadius);
             }
@@ -127,7 +125,7 @@ public class SkidBehaviour : MonoBehaviour
     private void SwitchTurnIndicatorDirection()
     {
         turnIndicatorTimer = 0;
-        currentTurnIndicatorTime = Mathf.Lerp(maxTurnIndicatorTime, minTurnIndicatorTime, currentSpeedBoost);
+        currentTurnIndicatorTime = Mathf.Lerp(maxTurnIndicatorTime, minTurnIndicatorTime, GetComponent<MoveBehaviour>() ? GetComponent<MoveBehaviour>().GetSpeedBoost() : 0);
         turnLeft = !turnLeft;
 
         ShowTurnIndicator();

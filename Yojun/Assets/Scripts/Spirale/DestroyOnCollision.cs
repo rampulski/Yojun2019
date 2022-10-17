@@ -23,24 +23,35 @@ public class DestroyOnCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (moveBehaviour.GetSpeed() < collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
-            {
-                GetComponent<Car>().Kill();
-
-                if (collision.gameObject.GetComponent<TrailBehaviour>())
-                    collision.gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
-            }
-            else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
+            if (GetComponent<Car>().IsShieldActive())
             {
                 collision.gameObject.GetComponent<Car>().Kill();
-
-                if (gameObject.GetComponent<TrailBehaviour>())
-                    gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
+            }
+            else if (collision.gameObject.GetComponent<Car>().IsShieldActive())
+            {
+                GetComponent<Car>().Kill();
             }
             else
             {
-                GetComponent<Car>().Kill();
-                collision.gameObject.GetComponent<Car>().Kill();
+                if (moveBehaviour.GetSpeed() < collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
+                {
+                    GetComponent<Car>().Kill();
+
+                    if (collision.gameObject.GetComponent<TrailBehaviour>())
+                        collision.gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
+                }
+                else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
+                {
+                    collision.gameObject.GetComponent<Car>().Kill();
+
+                    if (gameObject.GetComponent<TrailBehaviour>())
+                        gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
+                }
+                else
+                {
+                    GetComponent<Car>().Kill();
+                    collision.gameObject.GetComponent<Car>().Kill();
+                }
             }
         }
     }

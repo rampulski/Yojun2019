@@ -8,6 +8,7 @@ public class MoveBehaviour : MonoBehaviour
     [SerializeField] private float maxSpeed = 20;
 
     private float currentSpeed;
+    private float currentSpeedBoost;
     private bool stopped;
 
 
@@ -15,6 +16,7 @@ public class MoveBehaviour : MonoBehaviour
     void Start()
     {
         currentSpeed = minSpeed;
+        currentSpeedBoost = 0;
         stopped = false;
     }
 
@@ -35,13 +37,24 @@ public class MoveBehaviour : MonoBehaviour
         stopped = true;
     }
 
-    public void BoostSpeed(float boost)
+    public void IncreaseSpeedBoost(float amount)
     {
-        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, boost);
+        currentSpeedBoost += amount;
+        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, currentSpeedBoost);
+    }
+
+    public float GetSpeedBoost()
+    {
+        return currentSpeedBoost;
     }
 
     public float GetSpeed()
     {
         return currentSpeed;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        currentSpeed = speed;
     }
 }
