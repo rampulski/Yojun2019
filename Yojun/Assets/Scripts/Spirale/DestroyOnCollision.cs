@@ -25,7 +25,15 @@ public class DestroyOnCollision : MonoBehaviour
         {
             if (GetComponent<Car>().IsShieldActive())
             {
-                collision.gameObject.GetComponent<Car>().Kill();
+                if (collision.gameObject.GetComponent<Car>().IsShieldActive())
+                {
+                    GetComponent<Car>().Kill();
+                    collision.gameObject.GetComponent<Car>().Kill();
+                }
+                else
+                {
+                    collision.gameObject.GetComponent<Car>().Kill();
+                }
             }
             else if (collision.gameObject.GetComponent<Car>().IsShieldActive())
             {
@@ -37,15 +45,13 @@ public class DestroyOnCollision : MonoBehaviour
                 {
                     GetComponent<Car>().Kill();
 
-                    if (collision.gameObject.GetComponent<TrailBehaviour>())
-                        collision.gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
+                    collision.gameObject.GetComponent<Car>().IncreaseScore();
                 }
                 else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
                 {
                     collision.gameObject.GetComponent<Car>().Kill();
 
-                    if (gameObject.GetComponent<TrailBehaviour>())
-                        gameObject.GetComponent<TrailBehaviour>().IncreaseDuration();
+                    GetComponent<Car>().IncreaseScore();
                 }
                 else
                 {

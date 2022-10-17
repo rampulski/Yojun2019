@@ -22,6 +22,9 @@ public class Car : MonoBehaviour
     public void IncreaseScore()
     {
         GameManager.instance.IncreaseScore(playerIndex);
+
+        if (GetComponent<TrailBehaviour>())
+            GetComponent<TrailBehaviour>().IncreaseDuration();
     }
 
     public void Kill()
@@ -32,8 +35,6 @@ public class Car : MonoBehaviour
         if (Random.value > 1f - bonusSpawnProbability)
         {
             int rand = Random.Range(0, bonusPrefabs.Length);
-            
-            Debug.Log(rand + " -> " + bonusPrefabs[rand].GetComponent<Bonus>().GetKind());
 
             Instantiate(bonusPrefabs[rand], transform.position, Quaternion.identity);
         }

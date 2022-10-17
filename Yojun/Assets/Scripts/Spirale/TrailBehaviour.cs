@@ -31,7 +31,5 @@ public class TrailBehaviour : MonoBehaviour
     {
         currentDuration = Mathf.Clamp(currentDuration + durationIncreaseRate, minDuration, maxDuration);
         trail.time = currentDuration;
-
-        GetComponent<Car>().IncreaseScore();
     }
 }
