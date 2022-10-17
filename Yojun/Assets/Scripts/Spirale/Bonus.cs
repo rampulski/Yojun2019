@@ -8,8 +8,10 @@ public class Bonus : MonoBehaviour
     [SerializeField, Range(-1, 1)] private float gain;
     [SerializeField] private float duration;
     [SerializeField] private float activationDelay;
+    [SerializeField] private Material neutralMaterial;
 
     private Rigidbody rb;
+    private Material mat;
 
     private float timer;
 
@@ -23,6 +25,8 @@ public class Bonus : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
         GetComponent<BoxCollider>().isTrigger = false;
+        mat = GetComponent<MeshRenderer>().material;
+        GetComponent<MeshRenderer>().material = neutralMaterial;
 
         rb.AddExplosionForce(75, transform.position, 0.8f);
     }
@@ -32,9 +36,14 @@ public class Bonus : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= activationDelay)
         {
-            rb.useGravity = false;
-            rb.isKinematic = true;
-            GetComponent<BoxCollider>().isTrigger = true;
+            if (rb.velocity.magnitude < 0.01f)
+            {
+                rb.useGravity = false;
+                rb.isKinematic = true;
+                GetComponent<BoxCollider>().isTrigger = true;
+
+                GetComponent<MeshRenderer>().material = mat;
+            }
         }
     }
 
