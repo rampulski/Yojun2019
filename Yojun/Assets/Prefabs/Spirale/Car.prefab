@@ -806,7 +806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 3
-  maxSpeed: 10
+  maxSpeed: 20
 --- !u!114 &8842335897489910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ MonoBehaviour:
   - {fileID: 4050713856862132024, guid: 14fd75d71ffd0bb44aae202b6678fa91, type: 3}
   - {fileID: 4050713856862132024, guid: dfdd1fa756bc8154cb8f89fa9b30d44c, type: 3}
   - {fileID: 4050713856862132024, guid: f0a083986046c2240a0bb51ea7731a5f, type: 3}
-  bonusSpawnProbability: 0.5
+  bonusSpawnProbability: 0.2
   startShieldDuration: 1
 --- !u!1 &6790956687496698818
 GameObject:
