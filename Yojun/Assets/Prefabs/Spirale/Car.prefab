@@ -787,10 +787,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPart: {fileID: 2561964853881387172, guid: b727efd539e93c7498122468adeb53c9, type: 3}
-  cubesPerAxis: 4
+  cubesPerAxis: 3
   delay: 5
   force: 150
   radius: 0.8
+  scale: 0.08
   minTimeToDie: 2
   maxTimeToDie: 8
 --- !u!114 &8051247423457233762

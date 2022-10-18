@@ -9,6 +9,7 @@ public class ExplodeIntoCubes : MonoBehaviour
 	public float delay = 1f;
 	public float force = 10f;
 	public float radius = 0.05f;
+	public float scale = 0.15f;
 	[SerializeField] private float minTimeToDie = 4;
 	[SerializeField] private float maxTimeToDie = 4;
 
@@ -19,7 +20,7 @@ public class ExplodeIntoCubes : MonoBehaviour
 		{
 			for (int y = 0; y < cubesPerAxis; y++)
 			{
-				for (int z = 0; z < cubesPerAxis /2f; z++)
+				for (int z = 0; z < cubesPerAxis; z++)
 				{
 					CreateCube(new Vector3(x, y, z));
 				}
@@ -29,17 +30,16 @@ public class ExplodeIntoCubes : MonoBehaviour
 
 	private void CreateCube(Vector3 coordinates)
 	{
-		carPart = Instantiate(carPart);
-		carPart.GetComponent<CarPart>().Spawn(minTimeToDie, maxTimeToDie);
+		GameObject part = Instantiate(carPart);
+		part.GetComponent<CarPart>().Spawn(minTimeToDie, maxTimeToDie);
 
-		carPart.GetComponent<MeshRenderer>().material = GetComponentInChildren<Renderer>().material;
+		part.GetComponent<MeshRenderer>().material = GetComponentInChildren<Renderer>().material;
 
-		carPart.transform.localScale = transform.localScale / cubesPerAxis;
+		part.transform.localScale = Vector3.one * scale;
 
-		Vector3 firstCube = transform.position - transform.localScale / 2 + carPart.transform.localScale / 2;
-		carPart.transform.position = firstCube + Vector3.Scale(coordinates, carPart.transform.localScale);
-		carPart.transform.localScale = carPart.transform.localScale / 3;
+		Vector3 firstCube = transform.position - transform.localScale / 2 + part.transform.localScale / 2;
+		part.transform.position = firstCube + Vector3.Scale(coordinates, part.transform.localScale);
 
-		carPart.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius);
+		part.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius);
 	}
 }
