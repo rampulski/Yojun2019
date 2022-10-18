@@ -45,60 +45,60 @@ public class SkidBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ready && !killed)
+        if (!killed)
         {
-            if (inputManager.inputPlayersPressed[playerIndex])
+            if (ready)
             {
-                float speed = 0, speedNorm = 0;
-                if (moveBehaviour)
+                if (inputManager.inputPlayersPressed[playerIndex])
                 {
-                    turnLeftRenderer.enabled = false;
-                    turnRightRenderer.enabled = false;
+                    float speed = 0, speedNorm = 0;
+                    if (moveBehaviour)
+                    {
+                        turnLeftRenderer.enabled = false;
+                        turnRightRenderer.enabled = false;
 
-                    speed = moveBehaviour.GetSpeed();
-                    speedNorm = moveBehaviour.GetSpeedNormalized();
+                        speed = moveBehaviour.GetSpeed();
+                        speedNorm = moveBehaviour.GetSpeedNormalized();
+                    }
 
-                    if (!skidding)
-                        moveBehaviour.Stop();
-                }
+                    skidding = true;
 
-                skidding = true;
+                    if (turnLeft)
+                        transform.RotateAround(transform.position + (transform.up * currentRadius), Vector3.forward, ((speed * 360) / (2f * Mathf.PI * currentRadius)) * Time.deltaTime);
+                    else
+                        transform.RotateAround(transform.position + (Quaternion.Euler(0, 0, 180) * transform.up * currentRadius), -Vector3.forward, ((speed * 360) / (2f * Mathf.PI * currentRadius)) * Time.deltaTime);
 
-                if (turnLeft)
-                {
-                    transform.RotateAround(transform.position + (transform.up * currentRadius), Vector3.forward, ((speed * 360) / (2f * Mathf.PI * currentRadius)) * Time.deltaTime);
+                    if (turnLeft)
+                        Debug.DrawRay(transform.position, transform.up * currentRadius, Color.red);
+                    else
+                        Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, 180) * transform.up * currentRadius, Color.yellow);
+
+                    if (moveBehaviour)
+                        moveBehaviour.IncreaseSpeedBoost(speedBoostRate * Time.deltaTime);
+
+                    currentRadius = Mathf.Clamp(currentRadius - (spiralShrinkSpeed * speedNorm * Time.deltaTime), 0, maxSpiralRadius);
                 }
                 else
                 {
-                    transform.RotateAround(transform.position + (Quaternion.Euler(0, 0, 180) * transform.up * currentRadius), -Vector3.forward, ((speed * 360) / (2f * Mathf.PI * currentRadius)) * Time.deltaTime);
+                    if (skidding)
+                    {
+                        skidding = false;
+
+                        SwitchTurnIndicatorDirection();
+                    }
+
+                    moveBehaviour.Move();
+
+                    turnIndicatorTimer += Time.deltaTime;
+                    if (turnIndicatorTimer >= currentTurnIndicatorTime)
+                        SwitchTurnIndicatorDirection();
+
+                    currentRadius = maxSpiralRadius;
                 }
-
-                if (turnLeft)
-                    Debug.DrawRay(transform.position, transform.up * currentRadius, Color.red);
-                else
-                    Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, 180) * transform.up * currentRadius, Color.yellow);
-
-                if (moveBehaviour)
-                    moveBehaviour.IncreaseSpeedBoost(speedBoostRate * Time.deltaTime);
-
-                currentRadius = Mathf.Clamp(currentRadius - (spiralShrinkSpeed * speedNorm * Time.deltaTime), 0, maxSpiralRadius);
             }
             else
             {
-                if (skidding)
-                {
-                    skidding = false;
-
-                    SwitchTurnIndicatorDirection();
-
-                    moveBehaviour.Resume();
-                }
-
-                turnIndicatorTimer += Time.deltaTime;
-                if (turnIndicatorTimer >= currentTurnIndicatorTime)
-                    SwitchTurnIndicatorDirection();
-
-                currentRadius = maxSpiralRadius;
+                moveBehaviour.Move();
             }
         }
 

@@ -9,7 +9,6 @@ public class MoveBehaviour : MonoBehaviour
 
     private float currentSpeed;
     private float currentSpeedBoost;
-    private bool stopped;
 
 
     // Start is called before the first frame update
@@ -17,29 +16,16 @@ public class MoveBehaviour : MonoBehaviour
     {
         currentSpeed = minSpeed;
         currentSpeedBoost = 0;
-        stopped = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Move()
     {
-        if (!stopped)
-            transform.position += transform.right * currentSpeed * Time.deltaTime;
+        transform.position += transform.right * currentSpeed * Time.deltaTime;
     }
 
     private void SetSpeed()
     {
         currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, currentSpeedBoost * currentSpeedBoost);
-    }
-
-    public void Resume()
-    {
-        stopped = false;
-    }
-
-    public void Stop()
-    {
-        stopped = true;
     }
 
     public void IncreaseSpeedBoost(float amount)
