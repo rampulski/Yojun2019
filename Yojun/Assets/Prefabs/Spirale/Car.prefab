@@ -777,7 +777,8 @@ MonoBehaviour:
   delay: 5
   force: 150
   radius: 0.8
-  scale: 0.08
+  scale: 0.1
+  height: 0.25
   minTimeToDie: 2
   maxTimeToDie: 8
 --- !u!114 &8051247423457233762
@@ -840,7 +841,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.4, z: 0.2}
-  m_Center: {x: -0.24, y: 0, z: -0.03}
+  m_Center: {x: -0.24, y: 0, z: 0.03}
 --- !u!114 &8614777155688069395
 MonoBehaviour:
   m_ObjectHideFlags: 0

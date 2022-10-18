@@ -7,6 +7,8 @@ public class ObstaclesGenerator : MonoBehaviour
     [SerializeField] private Transform obstaclePrefab;
     [SerializeField] private int minObstaclesCount = 2;
     [SerializeField] private int maxObstaclesCount = 4;
+    [SerializeField] private float minScale = 0.5f;
+    [SerializeField] private float maxScale = 0.75f;
     [SerializeField] private int areaRadius = 5;
     [SerializeField] private float minDist = 2;
 
@@ -31,6 +33,7 @@ public class ObstaclesGenerator : MonoBehaviour
             } while (!ok);
 
             obstacles.Add(Instantiate(obstaclePrefab, pos, Quaternion.Euler(-90, 0, 0), transform));
+            obstacles[obstacles.Count - 1].localScale = Vector3.one * Random.Range(minScale, maxScale);
         }
     }
 
