@@ -10,6 +10,7 @@ public class ExplodeIntoCubes : MonoBehaviour
 	public float force = 10f;
 	public float radius = 0.05f;
 	public float scale = 0.15f;
+	public float height = 0.25f;
 	[SerializeField] private float minTimeToDie = 4;
 	[SerializeField] private float maxTimeToDie = 4;
 
@@ -37,7 +38,7 @@ public class ExplodeIntoCubes : MonoBehaviour
 
 		part.transform.localScale = Vector3.one * scale;
 
-		Vector3 firstCube = transform.position - transform.localScale / 2 + part.transform.localScale / 2;
+		Vector3 firstCube = transform.position - (transform.forward * height);// - (transform.localScale / 2 + part.transform.localScale / 2);
 		part.transform.position = firstCube + Vector3.Scale(coordinates, part.transform.localScale);
 
 		part.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius);
