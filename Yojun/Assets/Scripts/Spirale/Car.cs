@@ -5,6 +5,9 @@ using UnityEngine;
 public class Car : MonoBehaviour
 {
     [SerializeField] private GameObject shield;
+    [SerializeField] private GameObject bottom;
+    [SerializeField] private GameObject top;
+    [SerializeField] private GameObject[] wheels;
     [SerializeField] private Transform[] bonusPrefabs;
     [SerializeField] private float bonusSpawnProbability;
     [SerializeField] private float startShieldDuration;
@@ -12,9 +15,15 @@ public class Car : MonoBehaviour
     private int playerIndex;
 
 
-    public void Init(int index)
+    public void Init(int index, Color color)
     {
         playerIndex = index;
+        bottom.GetComponent<Renderer>().material.SetColor("_EmissionColor", color);
+        top.GetComponent<Renderer>().material.SetColor("_EmissionColor", color);
+        for (int i = 0; i < wheels.Length; i++)
+        {
+            wheels[i].GetComponent<Renderer>().material.SetColor("_EmissionColor", color);
+        }
 
         StartCoroutine(Shield(startShieldDuration));
     }
@@ -76,10 +85,10 @@ public class Car : MonoBehaviour
 
     private IEnumerator Boost(float duration)
     {
-        float speed = 0;
+        float speedBoost = 0;
         if (GetComponent<MoveBehaviour>())
         {
-            speed = GetComponent<MoveBehaviour>().GetSpeed();
+            speedBoost = GetComponent<MoveBehaviour>().GetSpeedBoost();
 
             GetComponent<MoveBehaviour>().IncreaseSpeedBoost(1);
         }
@@ -88,7 +97,7 @@ public class Car : MonoBehaviour
 
         if (GetComponent<MoveBehaviour>())
         {
-            GetComponent<MoveBehaviour>().SetSpeed(speed);
+            GetComponent<MoveBehaviour>().SetSpeedBoost(speedBoost);
         }
     }
 

@@ -14,6 +14,8 @@ public class SkidBehaviour : MonoBehaviour
 
     private InputManager inputManager;
     private MoveBehaviour moveBehaviour;
+    private SpriteRenderer turnLeftRenderer;
+    private SpriteRenderer turnRightRenderer;
 
     private int playerIndex;
     private float turnIndicatorTimer;
@@ -30,9 +32,6 @@ public class SkidBehaviour : MonoBehaviour
     {
         inputManager = InputManager.instance;
         moveBehaviour = GetComponent<MoveBehaviour>();
-
-        turnLeftIndicator.GetComponent<SpriteRenderer>().enabled = false;
-        turnRightIndicator.GetComponent<SpriteRenderer>().enabled = false;
 
         turnIndicatorTimer = 0;
         currentTurnIndicatorTime = maxTurnIndicatorTime;
@@ -53,6 +52,9 @@ public class SkidBehaviour : MonoBehaviour
                 float speed = 0;
                 if (moveBehaviour)
                 {
+                    turnLeftRenderer.enabled = false;
+                    turnRightRenderer.enabled = false;
+
                     speed = moveBehaviour.GetSpeed();
 
                     if (!skidding)
@@ -106,9 +108,16 @@ public class SkidBehaviour : MonoBehaviour
         }
     }
 
-    public void Init(int index, float delay)
+    public void Init(int index, float delay, Color color)
     {
         playerIndex = index;
+
+        turnLeftRenderer = turnLeftIndicator.GetComponent<SpriteRenderer>();
+        turnRightRenderer = turnRightIndicator.GetComponent<SpriteRenderer>();
+        turnLeftRenderer.material.SetColor("_EmissionColor", color);
+        turnRightRenderer.material.SetColor("_EmissionColor", color);
+        turnLeftRenderer.enabled = false;
+        turnRightRenderer.enabled = false;
 
         StartCoroutine(WaitToStart(delay));
     }
@@ -133,7 +142,7 @@ public class SkidBehaviour : MonoBehaviour
 
     private void ShowTurnIndicator()
     {
-        turnLeftIndicator.GetComponent<SpriteRenderer>().enabled = turnLeft;
-        turnRightIndicator.GetComponent<SpriteRenderer>().enabled = !turnLeft;
+        turnLeftRenderer.enabled = turnLeft;
+        turnRightRenderer.enabled = !turnLeft;
     }
 }

@@ -48,13 +48,14 @@ public class MoveBehaviour : MonoBehaviour
         return currentSpeedBoost;
     }
 
+    public void SetSpeedBoost(float amount)
+    {
+        currentSpeedBoost = amount;
+        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, currentSpeedBoost);
+    }
+
     public float GetSpeed()
     {
         return currentSpeed;
-    }
-
-    public void SetSpeed(float speed)
-    {
-        currentSpeed = speed;
     }
 }

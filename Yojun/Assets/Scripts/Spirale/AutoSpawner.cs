@@ -65,18 +65,13 @@ public class AutoSpawner : MonoBehaviour
             else
                 auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg), transform.parent.parent);
 
-            MeshRenderer[] renderers = auto.GetComponentsInChildren<MeshRenderer>();
-            for (int i = 0; i < renderers.Length; i++)
-                renderers[i].material.SetColor("_EmissionColor", InputManager.instance.GetPlayerColor(playerNumber - 1));
-            auto.GetComponentInChildren<TrailRenderer>().material.SetColor("_EmissionColor", InputManager.instance.GetPlayerColor(playerNumber - 1));
-
-            auto.GetComponent<Car>().Init(playerNumber - 1);
+            auto.GetComponent<Car>().Init(playerNumber - 1, InputManager.instance.GetPlayerColor(playerNumber - 1));
 
             if (auto.GetComponent<TrailBehaviour>())
-                auto.GetComponent<TrailBehaviour>().Init(GameManager.instance.GetPlayerScore(playerNumber - 1));
+                auto.GetComponent<TrailBehaviour>().Init(GameManager.instance.GetPlayerScore(playerNumber - 1), InputManager.instance.GetPlayerColor(playerNumber - 1));
 
             if (auto.GetComponent<SkidBehaviour>())
-                auto.GetComponent<SkidBehaviour>().Init(playerNumber - 1, delayToMove);
+                auto.GetComponent<SkidBehaviour>().Init(playerNumber - 1, delayToMove, InputManager.instance.GetPlayerColor(playerNumber - 1));
 
             if (!GameManager.instance.IsPlayerExist(playerNumber - 1))
                 GameManager.instance.AddPlayer(playerNumber - 1, auto.gameObject);

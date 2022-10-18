@@ -13,9 +13,10 @@ public class TrailBehaviour : MonoBehaviour
     private float currentDuration;
 
 
-    public void Init(int score)
+    public void Init(int score, Color color)
     {
         trail = GetComponentInChildren<TrailRenderer>();
+        trail.material.SetColor("_EmissionColor", color);
 
         currentDuration = minDuration;
         trail.time = currentDuration;
