@@ -27,6 +27,11 @@ public class MoveBehaviour : MonoBehaviour
             transform.position += transform.right * currentSpeed * Time.deltaTime;
     }
 
+    private void SetSpeed()
+    {
+        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, currentSpeedBoost * currentSpeedBoost);
+    }
+
     public void Resume()
     {
         stopped = false;
@@ -40,7 +45,7 @@ public class MoveBehaviour : MonoBehaviour
     public void IncreaseSpeedBoost(float amount)
     {
         currentSpeedBoost += amount;
-        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, currentSpeedBoost);
+        SetSpeed();
     }
 
     public float GetSpeedBoost()
@@ -51,11 +56,16 @@ public class MoveBehaviour : MonoBehaviour
     public void SetSpeedBoost(float amount)
     {
         currentSpeedBoost = amount;
-        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, currentSpeedBoost);
+        SetSpeed();
     }
 
     public float GetSpeed()
     {
         return currentSpeed;
+    }
+
+    public float GetSpeedNormalized()
+    {
+        return currentSpeed / maxSpeed;
     }
 }

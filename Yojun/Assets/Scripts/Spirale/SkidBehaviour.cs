@@ -49,13 +49,14 @@ public class SkidBehaviour : MonoBehaviour
         {
             if (inputManager.inputPlayersPressed[playerIndex])
             {
-                float speed = 0;
+                float speed = 0, speedNorm = 0;
                 if (moveBehaviour)
                 {
                     turnLeftRenderer.enabled = false;
                     turnRightRenderer.enabled = false;
 
                     speed = moveBehaviour.GetSpeed();
+                    speedNorm = moveBehaviour.GetSpeedNormalized();
 
                     if (!skidding)
                         moveBehaviour.Stop();
@@ -80,7 +81,7 @@ public class SkidBehaviour : MonoBehaviour
                 if (moveBehaviour)
                     moveBehaviour.IncreaseSpeedBoost(speedBoostRate * Time.deltaTime);
 
-                currentRadius = Mathf.Clamp(currentRadius - (spiralShrinkSpeed * Time.deltaTime), 0, maxSpiralRadius);
+                currentRadius = Mathf.Clamp(currentRadius - (spiralShrinkSpeed * speedNorm * Time.deltaTime), 0, maxSpiralRadius);
             }
             else
             {
