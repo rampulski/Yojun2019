@@ -23,40 +23,47 @@ public class DestroyOnCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (GetComponent<Car>().IsShieldActive())
+            if (!GetComponent<Car>().IsDestroyed() && !collision.gameObject.GetComponent<Car>().IsDestroyed())
             {
-                if (collision.gameObject.GetComponent<Car>().IsShieldActive())
+                if (GetComponent<Car>().IsShieldActive())
                 {
-                    GetComponent<Car>().Kill();
-                    collision.gameObject.GetComponent<Car>().Kill();
+                    if (collision.gameObject.GetComponent<Car>().IsShieldActive())
+                    {
+                        GetComponent<Car>().Kill();
+                        collision.gameObject.GetComponent<Car>().Kill();
+                    }
+                    else
+                    {
+                        collision.gameObject.GetComponent<Car>().Kill();
+
+                        GetComponent<Car>().IncreaseScore();
+                    }
                 }
-                else
-                {
-                    collision.gameObject.GetComponent<Car>().Kill();
-                }
-            }
-            else if (collision.gameObject.GetComponent<Car>().IsShieldActive())
-            {
-                GetComponent<Car>().Kill();
-            }
-            else
-            {
-                if (moveBehaviour.GetSpeed() < collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
+                else if (collision.gameObject.GetComponent<Car>().IsShieldActive())
                 {
                     GetComponent<Car>().Kill();
 
                     collision.gameObject.GetComponent<Car>().IncreaseScore();
                 }
-                else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
-                {
-                    collision.gameObject.GetComponent<Car>().Kill();
-
-                    GetComponent<Car>().IncreaseScore();
-                }
                 else
                 {
-                    GetComponent<Car>().Kill();
-                    collision.gameObject.GetComponent<Car>().Kill();
+                    if (moveBehaviour.GetSpeed() < collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
+                    {
+                        GetComponent<Car>().Kill();
+
+                        collision.gameObject.GetComponent<Car>().IncreaseScore();
+                    }
+                    else if (moveBehaviour.GetSpeed() > collision.gameObject.GetComponent<MoveBehaviour>().GetSpeed())
+                    {
+                        collision.gameObject.GetComponent<Car>().Kill();
+
+                        GetComponent<Car>().IncreaseScore();
+                    }
+                    else
+                    {
+                        GetComponent<Car>().Kill();
+                        collision.gameObject.GetComponent<Car>().Kill();
+                    }
                 }
             }
         }

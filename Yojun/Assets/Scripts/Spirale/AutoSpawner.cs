@@ -58,25 +58,28 @@ public class AutoSpawner : MonoBehaviour
         if (canSpawn)
             spawnTimer += Time.deltaTime;
 
-        if (auto == null && !GameManager.instance.IsGameOver() && !banned && canSpawn && spawnTimer >= delayToSpawn)
+        if (auto == null && !banned && canSpawn && spawnTimer >= delayToSpawn)
         {
-            if (transform.position.x > center.position.x)
-                auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, 180 - (Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg)), transform.parent.parent);
-            else
-                auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg), transform.parent.parent);
+            if (!GameManager.instance.IsGameOver() || GameManager.instance.GetHighestScorePlayerIndices().Contains(playerNumber - 1))
+            {
+                if (transform.position.x > center.position.x)
+                    auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, 180 - (Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg)), transform.parent.parent);
+                else
+                    auto = Instantiate(autoPrefab, transform.position, Quaternion.Euler(0, 0, Mathf.Asin((center.position.y - transform.position.y) / (center.position - transform.position).magnitude) * Mathf.Rad2Deg), transform.parent.parent);
 
-            auto.GetComponent<Car>().Init(playerNumber - 1, InputManager.instance.GetPlayerColor(playerNumber - 1));
+                auto.GetComponent<Car>().Init(playerNumber - 1, InputManager.instance.GetPlayerColor(playerNumber - 1));
 
-            if (auto.GetComponent<TrailBehaviour>())
-                auto.GetComponent<TrailBehaviour>().Init(GameManager.instance.GetPlayerScore(playerNumber - 1), InputManager.instance.GetPlayerColor(playerNumber - 1));
+                if (auto.GetComponent<TrailBehaviour>())
+                    auto.GetComponent<TrailBehaviour>().Init(GameManager.instance.GetPlayerScore(playerNumber - 1), InputManager.instance.GetPlayerColor(playerNumber - 1));
 
-            if (auto.GetComponent<SkidBehaviour>())
-                auto.GetComponent<SkidBehaviour>().Init(playerNumber - 1, delayToMove, InputManager.instance.GetPlayerColor(playerNumber - 1));
+                if (auto.GetComponent<SkidBehaviour>())
+                    auto.GetComponent<SkidBehaviour>().Init(playerNumber - 1, delayToMove, InputManager.instance.GetPlayerColor(playerNumber - 1));
 
-            if (!GameManager.instance.IsPlayerExist(playerNumber - 1))
-                GameManager.instance.AddPlayer(playerNumber - 1, auto.gameObject);
-            else
-                GameManager.instance.ResetPlayer(playerNumber - 1, auto.gameObject);
+                if (!GameManager.instance.IsPlayerExist(playerNumber - 1))
+                    GameManager.instance.AddPlayer(playerNumber - 1, auto.gameObject);
+                else
+                    GameManager.instance.ResetPlayer(playerNumber - 1, auto.gameObject);
+            }
 
             canSpawn = false;
         }

@@ -13,10 +13,12 @@ public class Car : MonoBehaviour
     [SerializeField] private float startShieldDuration;
 
     private int playerIndex;
+    private bool destroyed;
 
 
     public void Init(int index, Color color)
     {
+        destroyed = false;
         playerIndex = index;
         bottom.GetComponent<Renderer>().material.SetColor("_EmissionColor", color);
         top.GetComponent<Renderer>().material.SetColor("_EmissionColor", color);
@@ -38,6 +40,8 @@ public class Car : MonoBehaviour
 
     public void Kill()
     {
+        destroyed = true;
+
         if (GetComponent<ExplodeIntoCubes>())
             GetComponent<ExplodeIntoCubes>().Explode();
 
@@ -113,5 +117,10 @@ public class Car : MonoBehaviour
     public bool IsShieldActive()
     {
         return shield.activeSelf;
+    }
+
+    public bool IsDestroyed()
+    {
+        return destroyed;
     }
 }

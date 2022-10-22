@@ -2364,6 +2364,21 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1388490491}
+    - target: {fileID: 1578654648615109462, guid: 299f77f235e820040826644e753de9de,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578654648615109462, guid: 299f77f235e820040826644e753de9de,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578654648615109462, guid: 299f77f235e820040826644e753de9de,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.03529412
+      objectReference: {fileID: 0}
     - target: {fileID: 3118034826713241189, guid: 299f77f235e820040826644e753de9de,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2473,6 +2488,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287250677431653158, guid: 299f77f235e820040826644e753de9de,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287250677431653158, guid: 299f77f235e820040826644e753de9de,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287250677431653158, guid: 299f77f235e820040826644e753de9de,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.03529412
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 299f77f235e820040826644e753de9de, type: 3}
@@ -2946,7 +2976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1605465355
 Transform:
   m_ObjectHideFlags: 0
@@ -3365,6 +3395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPlayersPressed: 000000000000000000000000
   gameSettings: {fileID: 11400000, guid: 2560a15aaad8ee04889d40d671377f0e, type: 2}
+  gabarit: 0
   timeToChangeScene: 0
 --- !u!114 &2018501628
 MonoBehaviour:
@@ -3378,9 +3409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47967fbdcc10864d934e7749a155e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDuration: 120
+  gameDuration: 20
   gameOverDuration: 8
   timerUI: {fileID: 1842442317}
+  border: {fileID: 1232013897}
 --- !u!1001 &2022643237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3870,6 +3902,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293441341727441945, guid: a9c39fd8e970ee54ea16436c0515070b,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293441341727441945, guid: a9c39fd8e970ee54ea16436c0515070b,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.03529412
       objectReference: {fileID: 0}
     - target: {fileID: 3293441341727441951, guid: a9c39fd8e970ee54ea16436c0515070b,
         type: 3}

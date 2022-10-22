@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [System.Serializable]
     public class Player
     {
         public int index;
@@ -76,21 +77,29 @@ public class GameManager : MonoBehaviour
         {
             gameOver = true;
 
-            int winningScore = -1;
-            List<int> winningPlayers = new List<int>();
-            for (int i = 0; i < players.Count; i++)
+            players.Sort(delegate (Player player1, Player player2)
             {
-                if (players[i].score > winningScore)
-                {
-                    winningPlayers.Add(i);
-                    winningScore = players[i].score;
-                }
-            }
+                if (player1.score > player2.score)
+                    return 1;
+                else if (player1.score < player2.score)
+                    return -1;
+                else
+                    return 0;
+            });
 
-            for (int i = 0; i < players.Count; i++)
+            StartCoroutine(KillPlayer(GetHighestScorePlayerIndices()));
+        }
+    }
+
+    private IEnumerator KillPlayer(List<int> winningPlayers)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (!winningPlayers.Contains(players[i].index) && players[i].gameObject != null)
             {
-                if (!winningPlayers.Contains(i) && players[i].gameObject != null)
-                    players[i].gameObject.GetComponent<Car>().Kill();
+                players[i].gameObject.GetComponent<Car>().Kill();
+
+                yield return new WaitForSeconds((gameOverDuration * 0.5f) / winningPlayers.Count);
             }
         }
     }
@@ -146,6 +155,26 @@ public class GameManager : MonoBehaviour
             if (players[i].index == index)
                 players[i].banned = false;
         }
+    }
+
+    public List<int> GetHighestScorePlayerIndices()
+    {
+        int maxScore = -1;
+        List<int> indices = new List<int>();
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i].score > maxScore)
+                maxScore = players[i].score;
+        }
+
+        // Find all players with highest score
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i].score == maxScore)
+                indices.Add(players[i].index);
+        }
+
+        return indices;
     }
 
     public bool IsPlayerExist(int index)
