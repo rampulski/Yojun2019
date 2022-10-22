@@ -34,7 +34,7 @@ public class ExplodeIntoCubes : MonoBehaviour
 		GameObject part = Instantiate(carPart);
 		part.GetComponent<CarPart>().Spawn(minTimeToDie, maxTimeToDie);
 
-		part.GetComponent<MeshRenderer>().material = GetComponentInChildren<Renderer>().material;
+		part.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", GetComponentInChildren<Renderer>().material.GetColor("_EmissionColor"));
 
 		part.transform.localScale = Vector3.one * scale;
 
