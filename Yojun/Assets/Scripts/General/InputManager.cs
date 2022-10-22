@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
     public bool[] inputPlayersPressed;
 
     [SerializeField] private GameSettings gameSettings;
+    [SerializeField] private bool gabarit = true;
 
     private GabaritPlayerPos gabaritScript;
     public float timeToChangeScene;
@@ -51,22 +52,24 @@ public class InputManager : MonoBehaviour
             SceneManager.LoadScene(buildIndex);
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (gabarit)
         {
-            gabaritScript.SwitchColor();
-        }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                gabaritScript.SwitchColor();
+            }
 
-        if (Input.GetKey(KeyCode.N))
-        {
-            gabaritScript.scaleValue -= 0.01f;
-            gabaritScript.ChangeSize();
+            if (Input.GetKey(KeyCode.N))
+            {
+                gabaritScript.scaleValue -= 0.01f;
+                gabaritScript.ChangeSize();
+            }
+            if (Input.GetKey(KeyCode.Comma))
+            {
+                gabaritScript.scaleValue += 0.01f;
+                gabaritScript.ChangeSize();
+            }
         }
-        if (Input.GetKey(KeyCode.Comma))
-        {
-            gabaritScript.scaleValue += 0.01f;
-            gabaritScript.ChangeSize();
-        }
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

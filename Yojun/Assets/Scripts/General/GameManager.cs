@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float gameDuration;
     [SerializeField] private float gameOverDuration;
     [SerializeField] private Image timerUI;
+    [SerializeField] private MeshRenderer border;
 
     private List<Player> players;
 
@@ -58,6 +59,14 @@ public class GameManager : MonoBehaviour
     {
         timer += Time.deltaTime;
         timerUI.fillAmount = 1 - (timer / gameDuration);
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (border.enabled)
+                border.enabled = false;
+            else
+                border.enabled = true;
+        }
 
         if (gameOver && timer >= gameDuration + gameOverDuration)
         {
