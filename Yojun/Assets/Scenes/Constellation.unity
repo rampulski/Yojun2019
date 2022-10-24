@@ -3895,7 +3895,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530703451}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -4012,6 +4012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3310633f79901489e0ee080ed4f2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  border: {fileID: 1530703453}
   scaleValue: 0
 --- !u!1001 &1588427808
 PrefabInstance:
@@ -4815,6 +4816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPlayersPressed: 000000000000000000000000
   gameSettings: {fileID: 0}
+  gabarit: 1
   timeToChangeScene: 0
 --- !u!1001 &2022643237
 PrefabInstance:

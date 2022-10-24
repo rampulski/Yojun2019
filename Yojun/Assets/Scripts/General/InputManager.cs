@@ -56,7 +56,7 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
-                gabaritScript.SwitchColor();
+                gabaritScript.SwitchBorderVisibility();
             }
 
             if (Input.GetKey(KeyCode.N))

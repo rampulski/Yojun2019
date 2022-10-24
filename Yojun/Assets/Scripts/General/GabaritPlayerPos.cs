@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GabaritPlayerPos : MonoBehaviour {
+public class GabaritPlayerPos : MonoBehaviour
+{
+    [SerializeField] private SpriteRenderer border;
 
-    private SpriteRenderer[] playerPosRenderer;
     private Transform[] playerPosTransform;
 
     [HideInInspector]
@@ -14,11 +15,9 @@ public class GabaritPlayerPos : MonoBehaviour {
 
     void Start () {
 
-        playerPosRenderer = GetComponentsInChildren<SpriteRenderer>();
         playerPosTransform = GetComponentsInChildren<Transform>();
 
         scaleValue = playerPosTransform[1].localScale.x;
-
     }
 
     void Update () {
@@ -27,21 +26,9 @@ public class GabaritPlayerPos : MonoBehaviour {
     }
 
 
-   public void SwitchColor()
-    {      
-        if (color == Color.black)
-        {
-            color = Color.white;
-        }
-        else if (color == Color.white)
-        {
-            color = Color.black;
-        }
-
-        for (int i = playerPosRenderer.Length -1; i < playerPosRenderer.Length; i++)
-        {
-            playerPosRenderer[i].color = color;
-        }      
+   public void SwitchBorderVisibility()
+    {
+        border.enabled = !border.enabled;
     }
 
     public void ChangeSize()
